@@ -11,6 +11,7 @@ export default function PortfolioCardList() {
         key={item.slug}
         title={item.appName}
         description={item.appDescription}
+        creator={item.creator}
         link={item.url}
         image={item.image}
         slug={item.slug}

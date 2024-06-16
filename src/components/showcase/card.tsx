@@ -3,12 +3,14 @@ import Link from "next/link";
 export default function Card({
   title,
   description,
+  creator,
   link,
   image,
   slug,
 }: {
   title: string;
   description: string;
+  creator: string;
   link: string;
   image: string;
   slug: string;
@@ -33,8 +35,9 @@ export default function Card({
             </span>
           </a>
         </h2>
-        <p className="mt-5">{description}</p>
-        <div className="flex gap-2 mt-4">
+        <p className="mt-5">{creator}</p>
+        <p className="mb-5">{description}</p>
+        <div className="flex gap-2">
           <Link
             href={`/showcase/${slug}`}
             className="rounded-full border border-white btnshine sm"

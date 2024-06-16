@@ -60,7 +60,7 @@ export default function AppPage({
                 {data.appName}
               </h1>
               <p className="text-center">{data.appDescription}</p>
-
+              <p className="text-center">{data.creator}</p>
               <p className="font-normal text-base mb-4 relative my-4 whitespace-pre-wrap">
                 {data.detailDescription}
               </p>
