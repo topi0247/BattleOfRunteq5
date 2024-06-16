@@ -66,14 +66,16 @@ export default function AppPage({
               </p>
 
               <div className="flex justify-center items-center gap-4">
-                <a
-                  href={data.repositoryURL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="border px-4 py-1 rounded-lg  border-gray-500 text-gray-300"
-                >
-                  リポジトリ
-                </a>
+                {data.repositoryURL && (
+                  <a
+                    href={data.repositoryURL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border px-4 py-1 rounded-lg  border-gray-500 text-gray-300"
+                  >
+                    リポジトリ
+                  </a>
+                )}
                 <a
                   href={data.appUrl}
                   target="_blank"

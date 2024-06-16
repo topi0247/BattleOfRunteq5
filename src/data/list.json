@@ -16,7 +16,7 @@
       "creator": "Creator 1",
       "image": "https://via.placeholder.com/1000",
       "url": "https://www.google.com",
-      "slug": "mini-app-1"
+      "slug": "pf-app-1"
     }
   ],
   "Other": [
@@ -26,7 +26,7 @@
       "creator": "Creator 1",
       "image": "https://via.placeholder.com/1000",
       "url": "https://www.google.com",
-      "slug": "mini-app-1"
+      "slug": "other-app-1"
     }
   ]
 }
