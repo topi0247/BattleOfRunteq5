@@ -7,6 +7,7 @@ interface Data {
   appName: string;
   appDescription: string;
   detailDescription: string;
+  creator: string;
   image: string;
   repositoryURL: string;
   appUrl: string;
