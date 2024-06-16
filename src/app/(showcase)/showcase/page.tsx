@@ -5,8 +5,6 @@ import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
 export default function Showcase() {
-  const searchParams = useSearchParams();
-  const tab = searchParams.get("tab") || "";
   return (
     <Suspense fallback={<div>Now Loading...</div>}>
       <ShowcaseContent />
