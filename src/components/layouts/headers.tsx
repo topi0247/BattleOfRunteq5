@@ -2,11 +2,19 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 export default function Headers() {
+  return (
+    <Suspense fallback={<div />}>
+      <HeaderContent />
+    </Suspense>
+  );
+}
+
+function HeaderContent() {
   const searchParams = useSearchParams();
   const tab = searchParams.get("tab") || "";
-
   return (
     <header className="w-full fixed bottom-0 z-50 bg-black md:sticky md:bottom-auto md:top-0 bg-opacity-40">
       <nav className="my-4">
