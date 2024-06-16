@@ -2,32 +2,116 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.btnshine {
+  position: relative;
+  display: inline-block;
+  background: #000000;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  outline: none;
+  overflow: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.btnshine.sm {
+  padding: 0.3rem 1.6rem;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
+.btnshine::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  transform: skewX(-25deg);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+.btnshine:hover::before {
+  animation: shine 0.7s;
+}
+
+@keyframes shine {
+  100% {
+    left: 125%;
   }
+}
+
+.btn-link {
+  position: relative;
+  display: inline-block;
+  color: #ffffff;
+  padding: 5px 10px;
+  background: #000000;
+  transition: all 0.3s;
+  transition-delay: 0.5s;
+}
+
+.btn-link.active {
+  background: #ffffff;
+  color: #000000;
+}
+
+.btn-link:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+.btn-link span {
+  display: block;
+}
+
+.btn-link::before,
+.btn-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  background: #333;
+  transition: all 0.2s linear;
+}
+
+.btn-link span::before,
+.btn-link span::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 0;
+  background: #ffffff;
+  transition: all 0.2s linear;
+}
+
+.btn-link:hover::before,
+.btn-link:hover::after {
+  width: 100%;
+}
+
+.btn-link:hover span::before,
+.btn-link:hover span::after {
+  height: 100%;
+}
+
+.border-liner::before {
+  right: 0;
+  top: 0;
+  transition-delay: 0.2s;
+}
+.border-liner::after {
+  left: 0;
+  bottom: 0;
+  transition-delay: 0.2s;
+}
+
+.border-liner span::before {
+  left: 0;
+  top: 0;
+}
+.border-liner span::after {
+  right: 0;
+  bottom: 0;
 }

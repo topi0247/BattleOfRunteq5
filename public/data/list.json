@@ -1,0 +1,113 @@
+{
+  "mini": [
+    {
+      "appName": "Mini App 1",
+      "appDescription": "This is a mini app 1",
+      "image": "https://via.placeholder.com/150",
+      "url": "https://www.google.com",
+      "slug": "mini-app-1"
+    },
+    {
+      "appName": "Mini App 2",
+      "appDescription": "This is a mini app 2",
+      "image": "https://via.placeholder.com/150",
+      "url": "https://www.google.com",
+      "slug": "mini-app-2"
+    },
+    {
+      "appName": "Mini App 3",
+      "appDescription": "This is a mini app 3",
+      "image": "https://via.placeholder.com/150",
+      "url": "https://www.google.com",
+      "slug": "mini-app-3"
+    },
+    {
+      "appName": "Mini App 4",
+      "appDescription": "This is a mini app 4",
+      "image": "https://via.placeholder.com/150",
+      "url": "https://www.google.com",
+      "slug": "mini-app-4"
+    },
+    {
+      "appName": "Mini App 5",
+      "appDescription": "This is a mini app 5",
+      "image": "https://via.placeholder.com/150",
+      "url": "https://www.google.com",
+      "slug": "mini-app-5"
+    }
+  ],
+  "Portfolio": [
+    {
+      "appName": "Portfolio 1",
+      "appDescription": "This is a Portfolio 1",
+      "image": "https://via.placeholder.com/150",
+      "url": "https://www.google.com",
+      "slug": "portfolio-1"
+    },
+    {
+      "appName": "Portfolio 2",
+      "appDescription": "This is a Portfolio 2",
+      "image": "https://via.placeholder.com/150",
+      "url": "https://www.google.com",
+      "slug": "portfolio-2"
+    },
+    {
+      "appName": "Portfolio 3",
+      "appDescription": "This is a Portfolio 3",
+      "image": "https://via.placeholder.com/150",
+      "url": "https://www.google.com",
+      "slug": "portfolio-3"
+    },
+    {
+      "appName": "Portfolio 4",
+      "appDescription": "This is a Portfolio 4",
+      "image": "https://via.placeholder.com/150",
+      "url": "https://www.google.com",
+      "slug": "portfolio-4"
+    },
+    {
+      "appName": "Portfolio 5",
+      "appDescription": "This is a Portfolio 5",
+      "image": "https://via.placeholder.com/150",
+      "url": "https://www.google.com",
+      "slug": "portfolio-5"
+    }
+  ],
+  "other": [
+    {
+      "appName": "Other 1",
+      "appDescription": "This is a Other 1",
+      "image": "https://via.placeholder.com/150",
+      "url": "https://www.google.com",
+      "slug": "other-1"
+    },
+    {
+      "appName": "Other 2",
+      "appDescription": "This is a Other 2",
+      "image": "https://via.placeholder.com/150",
+      "url": "https://www.google.com",
+      "slug": "other-2"
+    },
+    {
+      "appName": "Other 3",
+      "appDescription": "This is a Other 3",
+      "image": "https://via.placeholder.com/150",
+      "url": "https://www.google.com",
+      "slug": "other-3"
+    },
+    {
+      "appName": "Other 4",
+      "appDescription": "This is a Other 4",
+      "image": "https://via.placeholder.com/150",
+      "url": "https://www.google.com",
+      "slug": "other-4"
+    },
+    {
+      "appName": "Other 5",
+      "appDescription": "This is a Other 5",
+      "image": "https://via.placeholder.com/150",
+      "url": "https://www.google.com",
+      "slug": "other-5"
+    }
+  ]
+}
