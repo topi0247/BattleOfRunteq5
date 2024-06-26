@@ -58,7 +58,6 @@ function ShowcaseContent() {
           };
         });
 
-        setData(resultData);
         setAllData(resultData);
 
         // ミニアプリ
@@ -72,6 +71,25 @@ function ShowcaseContent() {
           (item: Data) => item.appType === "ポートフォリオ"
         );
         setPfData(pfApps);
+
+        // タブ
+        switch (tab as string) {
+          case "":
+            setData(resultData);
+            setTabName("ALL");
+            break;
+          case "mini":
+            setData(miniApps);
+            setTabName("Mini App");
+            break;
+          case "pf":
+            setData(pfApps);
+            setTabName("Portfolio");
+            break;
+          default:
+            setData(resultData);
+            break;
+        }
       } catch (error: any) {
         setError(error.message);
         console.error("Failed to fetch:", error);

@@ -32,8 +32,7 @@ export default function AppPage({
           throw new Error("Network response was not ok");
         }
         const result: Data[] = await response.json();
-        let resultData = result.find((item: Data) => item.id === slug);
-        console.log(result);
+        let resultData = result.find((item: Data) => item.id == slug);
         if (!resultData) {
           throw new Error("Not found");
         }
@@ -41,6 +40,13 @@ export default function AppPage({
         const id = url.searchParams.get("id");
         const imageURL = `https://lh3.googleusercontent.com/d/${id}`;
         resultData.appImage = imageURL;
+
+        if (resultData.creatorX.includes("@")) {
+          const id = resultData.creatorX.replace("@", "");
+          const xURL = `https://x.com/${id}`;
+          resultData.creatorX = xURL;
+        }
+
         setData(resultData);
       } catch (error: any) {
         console.error("Failed to fetch:", error);
@@ -96,6 +102,16 @@ export default function AppPage({
                 >
                   サービス
                 </a>
+                {data.creatorX && (
+                  <a
+                    href={data.creatorX}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border px-4 py-1 rounded-lg  border-gray-500 text-gray-300"
+                  >
+                    X
+                  </a>
+                )}
               </div>
             </div>
           </div>
