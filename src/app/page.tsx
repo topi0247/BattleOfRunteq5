@@ -1,7 +1,11 @@
+"use client";
 import { SparklesCore } from "@/components/ui";
 import Link from "next/link";
+import useSWR from "swr";
 
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 export default function Home() {
+  const { data } = useSWR(process.env.NEXT_PUBLIC_GAS_URL || "", fetcher);
   return (
     <main className="bg-black w-full min-h-screen flex justify-center items-center">
       <div className="h-[40rem] bg-black flex flex-col items-center justify-center overflow-hidden rounded-md container">

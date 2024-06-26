@@ -2,6 +2,7 @@
 
 import { BackButton, Meteors } from "@/components/ui";
 import { useEffect, useState } from "react";
+import useSWR from "swr";
 
 interface Data {
   id: string;
@@ -16,47 +17,38 @@ interface Data {
   repositoryURL: string;
 }
 
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 export default function AppPage({
   params: { slug },
 }: {
   params: { slug: string };
 }) {
-  const [data, setData] = useState<Data | null>(null);
+  const API_URL = process.env.NEXT_PUBLIC_GAS_URL || "";
+  const { data } = useSWR(API_URL, fetcher);
+  const [showData, setShowData] = useState<Data | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const API_URL = process.env.NEXT_PUBLIC_GAS_URL || "";
-      try {
-        const response = await fetch(API_URL);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const result: Data[] = await response.json();
-        let resultData = result.find((item: Data) => item.id == slug);
-        if (!resultData) {
-          throw new Error("Not found");
-        }
-        const url = new URL(resultData.appImage);
-        const id = url.searchParams.get("id");
-        const imageURL = `https://lh3.googleusercontent.com/d/${id}`;
-        resultData.appImage = imageURL;
+    if (!data) return;
+    let resultData = data.find((item: Data) => item.id == slug);
+    if (!resultData) {
+      throw new Error("Not found");
+    }
+    const url = new URL(resultData.appImage);
+    const id = url.searchParams.get("id");
+    const imageURL = `https://lh3.googleusercontent.com/d/${id}`;
+    resultData.appImage = imageURL;
 
-        if (resultData.creatorX.includes("@")) {
-          const id = resultData.creatorX.replace("@", "");
-          const xURL = `https://x.com/${id}`;
-          resultData.creatorX = xURL;
-        }
+    if (resultData.creatorX.includes("@")) {
+      const id = resultData.creatorX.replace("@", "");
+      const xURL = `https://x.com/${id}`;
+      resultData.creatorX = xURL;
+    }
 
-        setData(resultData);
-      } catch (error: any) {
-        console.error("Failed to fetch:", error);
-      }
-    };
+    setShowData(resultData);
+  }, [data]);
 
-    fetchData();
-  }, []);
-
-  if (!data) {
+  if (!showData) {
     return <div>Now Loading...</div>;
   }
 
@@ -70,23 +62,23 @@ export default function AppPage({
             <div className="z-10 text-white w-full">
               <div className="w-full my-4">
                 <img
-                  src={data.appImage}
+                  src={showData.appImage}
                   className="w-full object-cover aspect-video"
                 />
               </div>
               <h1 className="font-bold text-xl text-white mb-4 relative z-50 text-center">
-                {data.appName}
+                {showData.appName}
               </h1>
-              <p className="text-center">{data.appShortDescription}</p>
-              <p className="text-center">{data.creator}</p>
+              <p className="text-center">{showData.appShortDescription}</p>
+              <p className="text-center">{showData.creator}</p>
               <p className="font-normal text-base mb-4 relative my-4 whitespace-pre-wrap">
-                {data.appDescription}
+                {showData.appDescription}
               </p>
 
               <div className="flex justify-center items-center gap-4">
-                {data.repositoryURL && (
+                {showData.repositoryURL && (
                   <a
-                    href={data.repositoryURL}
+                    href={showData.repositoryURL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="border px-4 py-1 rounded-lg  border-gray-500 text-gray-300"
@@ -95,16 +87,16 @@ export default function AppPage({
                   </a>
                 )}
                 <a
-                  href={data.appUrl}
+                  href={showData.appUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="border px-4 py-1 rounded-lg  border-gray-500 text-gray-300"
                 >
                   サービス
                 </a>
-                {data.creatorX && (
+                {showData.creatorX && (
                   <a
-                    href={data.creatorX}
+                    href={showData.creatorX}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="border px-4 py-1 rounded-lg  border-gray-500 text-gray-300"
