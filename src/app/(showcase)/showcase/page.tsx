@@ -20,6 +20,7 @@ interface Data {
   appType: string;
   appName: string;
   appImage: string;
+  originalAppImage: string;
   appUrl: string;
   appShortDescription: string;
   appDescription: string;
@@ -38,18 +39,24 @@ function ShowcaseContent() {
   const searchParams = useSearchParams();
   const tab = (searchParams.get("tab") as Tab) || "";
   const API_URL = process.env.NEXT_PUBLIC_GAS_URL || "";
-  const { data } = useSWR(API_URL, fetcher);
-  const [showData, setShowData] = useState<Data[] | null>(null);
-  const [allData, setAllData] = useState<Data[] | null>(null);
-  const [miniData, setMiniData] = useState<Data[] | null>(null);
-  const [pfData, setPfData] = useState<Data[] | null>(null);
-  const [tabName, setTabName] = useState<string | null>(null);
+  const { data, error } = useSWR<Data[]>(API_URL, fetcher);
+  const [showData, setShowData] = useState<Data[]>([]);
+  const [allData, setAllData] = useState<Data[]>([]);
+  const [miniData, setMiniData] = useState<Data[]>([]);
+  const [pfData, setPfData] = useState<Data[]>([]);
+  const [tabName, setTabName] = useState<string>("ALL");
 
   useEffect(() => {
-    if (!data || data === undefined) return;
+    if (!data) return;
+    const originalData = data.map((item: Data) => {
+      return {
+        ...item,
+        originalAppImage: item.appImage,
+      };
+    });
 
-    const resultData = data.map((item: Data) => {
-      const url = new URL(item.appImage);
+    const resultData = originalData.map((item: Data) => {
+      const url = new URL(item.originalAppImage);
       const id = url.searchParams.get("id");
       const imageURL = `https://lh3.googleusercontent.com/d/${id}`;
       return {
@@ -71,11 +78,28 @@ function ShowcaseContent() {
       (item: Data) => item.appType === "ポートフォリオ"
     );
     setPfData(pfApps);
+
+    switch (tab as string) {
+      case "":
+        setShowData(resultData);
+        setTabName("ALL");
+        break;
+      case "mini":
+        setShowData(miniApps);
+        setTabName("Mini App");
+        break;
+      case "pf":
+        setShowData(pfApps);
+        setTabName("Portfolio");
+        break;
+      default:
+        setShowData(resultData);
+        setTabName("ALL");
+        break;
+    }
   }, [data]);
 
   useEffect(() => {
-    if (!allData || !miniData || !pfData) return;
-
     switch (tab as string) {
       case "":
         setShowData(allData);
@@ -96,7 +120,11 @@ function ShowcaseContent() {
     }
   }, [tab, allData, miniData, pfData]);
 
-  if (!data || data === undefined) {
+  if (error) {
+    return <div>Failed to load data</div>;
+  }
+
+  if (!data) {
     return <div>Now Loading...</div>;
   }
 

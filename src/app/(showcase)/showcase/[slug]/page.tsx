@@ -9,6 +9,7 @@ interface Data {
   appType: string;
   appName: string;
   appImage: string;
+  originalAppImage: string;
   appUrl: string;
   appShortDescription: string;
   appDescription: string;
@@ -34,7 +35,13 @@ export default function AppPage({
     if (!resultData) {
       throw new Error("Not found");
     }
-    const url = new URL(resultData.appImage);
+
+    resultData = {
+      ...resultData,
+      originalAppImage: resultData.appImage,
+    };
+
+    const url = new URL(resultData.originalAppImage);
     const id = url.searchParams.get("id");
     const imageURL = `https://lh3.googleusercontent.com/d/${id}`;
     resultData.appImage = imageURL;
@@ -81,7 +88,7 @@ export default function AppPage({
                     href={showData.repositoryURL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="border px-4 py-1 rounded-lg  border-gray-500 text-gray-300"
+                    className="border px-4 py-1 rounded-lg  border-gray-500 text-gray-300 hover:bg-gray-500 hover:text-white transition-all"
                   >
                     リポジトリ
                   </a>
@@ -90,7 +97,7 @@ export default function AppPage({
                   href={showData.appUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border px-4 py-1 rounded-lg  border-gray-500 text-gray-300"
+                  className="border px-4 py-1 rounded-lg  border-gray-500 text-gray-300 hover:bg-gray-500 hover:text-white transition-all"
                 >
                   サービス
                 </a>
@@ -99,7 +106,7 @@ export default function AppPage({
                     href={showData.creatorX}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="border px-4 py-1 rounded-lg  border-gray-500 text-gray-300"
+                    className="border px-4 py-1 rounded-lg  border-gray-500 text-gray-300 hover:bg-gray-500 hover:text-white transition-all"
                   >
                     X
                   </a>
