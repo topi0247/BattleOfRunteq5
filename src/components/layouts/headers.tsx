@@ -52,16 +52,6 @@ function HeaderContent() {
               <span>Portfolio</span>
             </Link>
           </li>
-          <li>
-            <Link
-              href="/showcase?tab=other"
-              className={`btn-link border-liner ${
-                tab === "other" ? "active" : ""
-              }`}
-            >
-              <span>other</span>
-            </Link>
-          </li>
         </ul>
       </nav>
     </header>

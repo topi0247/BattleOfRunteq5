@@ -36,7 +36,7 @@ export default function Card({
           </a>
         </h2>
         <p className="mt-5">{creator}</p>
-        <p className="mb-5">{description}</p>
+        <p className="mb-5 px-4">{description}</p>
         <div className="flex gap-2">
           <Link
             href={`/showcase/${slug}`}

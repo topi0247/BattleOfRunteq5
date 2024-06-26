@@ -4,13 +4,16 @@ import { BackButton, Meteors } from "@/components/ui";
 import { useEffect, useState } from "react";
 
 interface Data {
+  id: string;
+  appType: string;
   appName: string;
-  appDescription: string;
-  detailDescription: string;
-  creator: string;
-  image: string;
-  repositoryURL: string;
+  appImage: string;
   appUrl: string;
+  appShortDescription: string;
+  appDescription: string;
+  creator: string;
+  creatorX: string;
+  repositoryURL: string;
 }
 
 export default function AppPage({
@@ -21,23 +24,31 @@ export default function AppPage({
   const [data, setData] = useState<Data | null>(null);
 
   useEffect(() => {
-    if (slug) {
-      const fetchData = async () => {
-        try {
-          const res = await fetch(`/data/${slug}.json`);
-          if (res.ok) {
-            const result = await res.json();
-            setData(result);
-          } else {
-            console.error("File not found");
-          }
-        } catch (error) {
-          console.error(error);
+    const fetchData = async () => {
+      const API_URL = process.env.NEXT_PUBLIC_GAS_URL || "";
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
         }
-      };
-      fetchData();
-    }
-  }, [slug]);
+        const result: Data[] = await response.json();
+        let resultData = result.find((item: Data) => item.id === slug);
+        console.log(result);
+        if (!resultData) {
+          throw new Error("Not found");
+        }
+        const url = new URL(resultData.appImage);
+        const id = url.searchParams.get("id");
+        const imageURL = `https://lh3.googleusercontent.com/d/${id}`;
+        resultData.appImage = imageURL;
+        setData(resultData);
+      } catch (error: any) {
+        console.error("Failed to fetch:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   if (!data) {
     return <div>Now Loading...</div>;
@@ -53,17 +64,17 @@ export default function AppPage({
             <div className="z-10 text-white w-full">
               <div className="w-full my-4">
                 <img
-                  src={data.image}
+                  src={data.appImage}
                   className="w-full object-cover aspect-video"
                 />
               </div>
               <h1 className="font-bold text-xl text-white mb-4 relative z-50 text-center">
                 {data.appName}
               </h1>
-              <p className="text-center">{data.appDescription}</p>
+              <p className="text-center">{data.appShortDescription}</p>
               <p className="text-center">{data.creator}</p>
               <p className="font-normal text-base mb-4 relative my-4 whitespace-pre-wrap">
-                {data.detailDescription}
+                {data.appDescription}
               </p>
 
               <div className="flex justify-center items-center gap-4">
