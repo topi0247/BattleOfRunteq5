@@ -7,6 +7,7 @@ export default function Card({
   link,
   image,
   slug,
+  term,
 }: {
   title: string;
   description: string;
@@ -14,6 +15,7 @@ export default function Card({
   link: string;
   image: string;
   slug: string;
+  term: string;
 }) {
   return (
     <section className="overflow-hidden border border-slate-600 rounded bg-black z-10">
@@ -35,7 +37,9 @@ export default function Card({
             </span>
           </a>
         </h2>
-        <p className="mt-5">{creator}</p>
+        <p className="mt-5">
+          {term}&nbsp;{creator}
+        </p>
         <p className="mb-5 px-4">{description}</p>
         <div className="flex gap-2">
           <Link

@@ -27,6 +27,7 @@ interface Data {
   creator: string;
   creatorX: string;
   repositoryURL: string;
+  term: string;
 }
 
 enum Tab {
@@ -142,6 +143,7 @@ function ShowcaseContent() {
               link={item.appUrl}
               image={item.appImage}
               slug={item.id}
+              term={item.term}
             />
           ))}
       </article>

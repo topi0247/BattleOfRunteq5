@@ -16,6 +16,7 @@ interface Data {
   creator: string;
   creatorX: string;
   repositoryURL: string;
+  term: string;
 }
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -77,7 +78,9 @@ export default function AppPage({
                 {showData.appName}
               </h1>
               <p className="text-center">{showData.appShortDescription}</p>
-              <p className="text-center">{showData.creator}</p>
+              <p className="text-center">
+                {showData.term}&nbsp;{showData.creator}
+              </p>
               <p className="font-normal text-base mb-4 relative my-4 whitespace-pre-wrap">
                 {showData.appDescription}
               </p>
